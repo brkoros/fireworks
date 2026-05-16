@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fireside — Onboarding Comics</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;900&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue-deep: #0a1628;
+    --blue-mid: #0d2147;
+    --blue-bright: #1a4fd6;
+    --blue-glow: #2563eb;
+    --blue-light: #3b82f6;
+    --orange: #f97316;
+    --orange-hot: #fb923c;
+    --yellow: #fbbf24;
+    --white: #f0f6ff;
+    --glass: rgba(255,255,255,0.06);
+    --glass-border: rgba(255,255,255,0.12);
+    --card-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    --font-comic: 'Bangers', cursive;
+    --font-body: 'Nunito', sans-serif;
+    --font-heading: 'Oswald', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--blue-deep);
+    color: var(--white);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* ── BACKGROUND GRID ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(26,79,214,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(26,79,214,0.07) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: -30%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(37,99,235,0.18) 0%, transparent 65%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,22,40,0.88);
+    backdrop-filter: blur(16px);
+    border-bottom: 2px solid var(--orange);
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+  }
+
+  .flame-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    filter: drop-shadow(0 0 8px var(--orange));
+    animation: flamePulse 2.5s ease-in-out infinite;
+  }
+
+  @keyframes flamePulse {
+    0%,100% { filter: drop-shadow(0 0 6px var(--orange)); transform: scale(1); }
+    50% { filter: drop-shadow(0 0 14px var(--orange-hot)); transform: scale(1.08); }
+  }
+
+  .logo-text {
+    font-family: var(--font-comic);
+    font-size: 1.9rem;
+    letter-spacing: 2px;
+    color: var(--orange);
+    text-shadow: 2px 2px 0 var(--blue-deep), 0 0 20px rgba(249,115,22,0.4);
+  }
+
+  .logo-sub {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(240,246,255,0.5);
+    display: block;
+    margin-top: -4px;
+  }
+
+  .nav-badge {
+    background: linear-gradient(135deg, var(--orange), var(--yellow));
+    color: var(--blue-deep);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    z-index: 1;
+    padding: 4rem 1.5rem 3rem;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .hero-eyebrow {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--orange);
+    border: 1px solid rgba(249,115,22,0.4);
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    margin-bottom: 1.2rem;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero h1 {
+    font-family: var(--font-comic);
+    font-size: clamp(2.8rem, 9vw, 5.5rem);
+    line-height: 1.05;
+    letter-spacing: 3px;
+    color: var(--white);
+    text-shadow: 4px 4px 0 var(--blue-mid), 0 0 40px rgba(59,130,246,0.3);
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  .hero h1 span { color: var(--orange); }
+
+  .hero-sub {
+    max-width: 520px;
+    margin: 1.2rem auto 2rem;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgba(240,246,255,0.7);
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: var(--font-comic);
+    font-size: 2rem;
+    color: var(--orange);
+    letter-spacing: 1px;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(240,246,255,0.5);
+  }
+
+  .halftone-decor {
+    position: absolute;
+    top: 10%;
+    left: -60px;
+    width: 200px;
+    height: 200px;
+    background-image: radial-gradient(circle, rgba(26,79,214,0.25) 2px, transparent 2px);
+    background-size: 16px 16px;
+    border-radius: 50%;
+    opacity: 0.6;
+  }
+
+  .halftone-decor.right {
+    left: auto;
+    right: -60px;
+    top: 20%;
+  }
+
+  /* ── SECTION TITLE ── */
+  .section-header {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 3rem 1.5rem 0.5rem;
+  }
+
+  .section-header h2 {
+    font-family: var(--font-comic);
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    letter-spacing: 2px;
+    color: var(--white);
+  }
+
+  .section-header h2 span { color: var(--orange); }
+
+  .section-divider {
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--orange), var(--yellow));
+    border-radius: 2px;
+    margin: 0.8rem auto 0;
+  }
+
+  /* ── DEPARTMENT TABS ── */
+  .dept-tabs-wrapper {
+    position: relative;
+    z-index: 1;
+    padding: 2rem 1rem 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .dept-tabs {
+    display: flex;
+    gap: 0.6rem;
+    min-width: max-content;
+    padding: 0 0.5rem 0.5rem;
+    margin: 0 auto;
+    max-width: 900px;
+    justify-content: center;
+  }
+
+  .tab-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.7rem 1rem;
+    border: 2px solid var(--glass-border);
+    border-radius: 12px;
+    background: var(--glass);
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    min-width: 90px;
+    color: rgba(240,246,255,0.65);
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    position: relative;
+  }
+
+  .tab-btn .tab-icon {
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  .tab-btn:hover {
+    border-color: var(--blue-light);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(59,130,246,0.25);
+  }
+
+  .tab-btn.active {
+    border-color: var(--orange);
+    background: rgba(249,115,22,0.12);
+    color: var(--orange);
+    box-shadow: 0 4px 24px rgba(249,115,22,0.25);
+  }
+
+  .tab-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: var(--blue-deep);
+    font-size: 0.65rem;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── COMICS GRID ── */
+  .comics-section {
+    position: relative;
+    z-index: 1;
+    padding: 2rem 1rem 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .dept-panel { display: none; }
+  .dept-panel.active { display: block; }
+
+  .dept-title-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 2px solid var(--glass-border);
+  }
+
+  .dept-title-icon { font-size: 1.8rem; }
+
+  .dept-title-bar h3 {
+    font-family: var(--font-comic);
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+  }
+
+  .dept-title-bar h3 .dept-color { color: var(--orange); }
+
+  .dept-desc {
+    font-size: 0.85rem;
+    color: rgba(240,246,255,0.5);
+    margin-left: auto;
+    display: none;
+  }
+
+  @media (min-width: 600px) { .dept-desc { display: block; } }
+
+  .comics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1.2rem;
+  }
+
+  @media (min-width: 500px) {
+    .comics-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+  }
+
+  /* ── COMIC CARD ── */
+  .comic-card {
+    background: var(--glass);
+    border: 2px solid var(--glass-border);
+    border-radius: 14px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .comic-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    border-color: var(--orange);
+    box-shadow: 0 12px 40px rgba(249,115,22,0.2), var(--card-shadow);
+  }
+
+  .comic-cover {
+    aspect-ratio: 3/4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .comic-cover-art {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1.2rem;
+    text-align: center;
+    position: relative;
+  }
+
+  .cover-number {
+    font-family: var(--font-comic);
+    font-size: 3.5rem;
+    line-height: 1;
+    color: rgba(255,255,255,0.12);
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.8rem;
+  }
+
+  .cover-icon {
+    font-size: 2.8rem;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+  }
+
+  .cover-title {
+    font-family: var(--font-comic);
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    line-height: 1.2;
+    color: rgba(255,255,255,0.9);
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.5);
+    z-index: 1;
+  }
+
+  .cover-badge {
+    position: absolute;
+    top: 0.6rem;
+    left: 0.6rem;
+    background: var(--orange);
+    color: var(--blue-deep);
+    font-size: 0.55rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    z-index: 2;
+  }
+
+  .new-badge { background: #22c55e; }
+
+  .comic-info {
+    padding: 0.75rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .comic-title {
+    font-weight: 800;
+    font-size: 0.82rem;
+    line-height: 1.3;
+    color: var(--white);
+  }
+
+  .comic-meta {
+    font-size: 0.68rem;
+    color: rgba(240,246,255,0.45);
+    letter-spacing: 0.5px;
+  }
+
+  .comic-actions {
+    display: flex;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+  }
+
+  .btn-read {
+    flex: 1;
+    padding: 0.45rem 0;
+    border-radius: 7px;
+    border: none;
+    background: linear-gradient(135deg, var(--blue-bright), var(--blue-light));
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
+
+  .btn-read:hover {
+    background: linear-gradient(135deg, var(--blue-light), var(--blue-glow));
+    transform: scale(1.04);
+  }
+
+  .btn-dl {
+    padding: 0.45rem 0.6rem;
+    border-radius: 7px;
+    border: 2px solid var(--glass-border);
+    background: transparent;
+    color: rgba(240,246,255,0.6);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn-dl:hover {
+    border-color: var(--orange);
+    color: var(--orange);
+    transform: scale(1.1);
+  }
+
+  /* ── GRADIENT COVERS per dept ── */
+  .grad-warehouse { background: linear-gradient(145deg, #1e3a5f 0%, #0f2744 60%, #1a3a6e 100%); }
+  .grad-drivers   { background: linear-gradient(145deg, #1a3a2e 0%, #0d2419 60%, #1f4a38 100%); }
+  .grad-noc       { background: linear-gradient(145deg, #2d1a4f 0%, #1a0d30 60%, #3a1f5e 100%); }
+  .grad-splicing  { background: linear-gradient(145deg, #4f2d1a 0%, #301a0d 60%, #5e3a1f 100%); }
+  .grad-field     { background: linear-gradient(145deg, #1a4f3a 0%, #0d3022 60%, #1f5e46 100%); }
+  .grad-admin     { background: linear-gradient(145deg, #1a3a4f 0%, #0d2230 60%, #1f4a5e 100%); }
+  .grad-safety    { background: linear-gradient(145deg, #4f1a1a 0%, #300d0d 60%, #5e1f1f 100%); }
+  .grad-hr        { background: linear-gradient(145deg, #3a1a4f 0%, #220d30 60%, #4a1f5e 100%); }
+
+  /* ── READER MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(5,12,25,0.95);
+    backdrop-filter: blur(12px);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    animation: fadeIn 0.2s ease;
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+  .modal-box {
+    background: var(--blue-mid);
+    border: 2px solid var(--orange);
+    border-radius: 18px;
+    width: 100%;
+    max-width: 700px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 20px 80px rgba(0,0,0,0.7), 0 0 40px rgba(249,115,22,0.15);
+    animation: slideUp 0.3s cubic-bezier(0.34,1.56,0.64,1) both;
+  }
+
+  @keyframes slideUp { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.2rem;
+    border-bottom: 1px solid var(--glass-border);
+    gap: 1rem;
+  }
+
+  .modal-title {
+    font-family: var(--font-comic);
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    color: var(--orange);
+  }
+
+  .modal-close {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid var(--glass-border);
+    background: transparent;
+    color: var(--white);
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+
+  .modal-close:hover { border-color: var(--orange); color: var(--orange); transform: rotate(90deg); }
+
+  .modal-viewer {
+    flex: 1;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+    gap: 1rem;
+  }
+
+  .pdf-placeholder {
+    width: 100%;
+    max-width: 460px;
+    background: var(--glass);
+    border: 2px dashed var(--glass-border);
+    border-radius: 12px;
+    aspect-ratio: 3/4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .pdf-placeholder-icon { font-size: 4rem; }
+
+  .pdf-placeholder h4 {
+    font-family: var(--font-comic);
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+    color: var(--white);
+  }
+
+  .pdf-placeholder p {
+    font-size: 0.85rem;
+    color: rgba(240,246,255,0.5);
+    line-height: 1.6;
+  }
+
+  .modal-actions {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0 1.5rem 1.5rem;
+  }
+
+  .modal-btn {
+    padding: 0.7rem 1.5rem;
+    border-radius: 10px;
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 2px solid transparent;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .modal-btn-primary {
+    background: linear-gradient(135deg, var(--orange), var(--orange-hot));
+    color: var(--blue-deep);
+  }
+  .modal-btn-primary:hover { transform: scale(1.04); box-shadow: 0 4px 20px rgba(249,115,22,0.4); }
+
+  .modal-btn-secondary {
+    background: transparent;
+    border-color: var(--glass-border);
+    color: var(--white);
+  }
+  .modal-btn-secondary:hover { border-color: var(--blue-light); color: var(--blue-light); }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative;
+    z-index: 1;
+    border-top: 2px solid var(--glass-border);
+    padding: 2rem 1.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  footer .f-logo {
+    font-family: var(--font-comic);
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    color: var(--orange);
+  }
+
+  footer p {
+    font-size: 0.75rem;
+    color: rgba(240,246,255,0.35);
+    letter-spacing: 0.5px;
+  }
+
+  /* ── SEARCH BAR ── */
+  .search-wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 480px;
+    margin: 1.5rem auto 0;
+    padding: 0 1rem;
+  }
+
+  .search-box {
+    width: 100%;
+    padding: 0.8rem 1.2rem 0.8rem 3rem;
+    border-radius: 50px;
+    border: 2px solid var(--glass-border);
+    background: var(--glass);
+    backdrop-filter: blur(8px);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .search-box::placeholder { color: rgba(240,246,255,0.35); }
+  .search-box:focus { border-color: var(--blue-light); }
+
+  .search-icon {
+    position: absolute;
+    left: 1.9rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    color: rgba(240,246,255,0.4);
+    pointer-events: none;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--blue-deep); }
+  ::-webkit-scrollbar-thumb { background: var(--blue-bright); border-radius: 3px; }
+
+  /* ── RESPONSIVE TWEAKS ── */
+  @media (max-width: 400px) {
+    .dept-tabs { justify-content: flex-start; }
+    .comic-cover { aspect-ratio: 2.5/3.5; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="flame-icon">🔥</div>
+    <div>
+      <span class="logo-text">FIRESIDE</span>
+      <span class="logo-sub">ICT Fibre Solutions</span>
+    </div>
+  </a>
+  <div class="nav-badge">📚 Onboarding Hub</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="halftone-decor"></div>
+  <div class="halftone-decor right"></div>
+  <div class="hero-eyebrow">🔌 New Employee Onboarding</div>
+  <h1>Learn Your Role,<br><span>One Panel</span> At A Time</h1>
+  <p class="hero-sub">Welcome to Fireside! Explore your department's comic book guides — fun, visual, and everything you need to hit the ground running in ICT fibre operations.</p>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-number">8</div><div class="stat-label">Departments</div></div>
+    <div class="stat"><div class="stat-number">40+</div><div class="stat-label">Comic Guides</div></div>
+    <div class="stat"><div class="stat-number">100%</div><div class="stat-label">Free Access</div></div>
+  </div>
+</section>
+
+<!-- SEARCH -->
+<div class="search-wrap">
+  <span class="search-icon">🔍</span>
+  <input class="search-box" type="text" placeholder="Search comics by title..." id="searchInput" oninput="handleSearch(this.value)">
+</div>
+
+<!-- DEPT TABS -->
+<div class="section-header">
+  <h2>Pick Your <span>Department</span></h2>
+  <div class="section-divider"></div>
+</div>
+
+<div class="dept-tabs-wrapper">
+  <div class="dept-tabs">
+    <button class="tab-btn active" onclick="switchTab('warehouse', this)">
+      <span class="tab-icon">📦</span>Warehouse<div class="tab-count">6</div>
+    </button>
+    <button class="tab-btn" onclick="switchTab('drivers', this)">
+      <span class="tab-icon">🚚</span>Drivers<div class="tab-count">5</div>
+    </button>
+    <button class="tab-btn" onclick="switchTab('noc', this)">
+      <span class="tab-icon">🖥️</span>NOC Team<div class="tab-count">6</div>
+    </button>
+    <button class="tab-btn" onclick="switchTab('splicing', this)">
+      <span class="tab-icon">🔧</span>Splicing<div class="tab-count">5</div>
+    </button>
+    <button class="tab-btn" onclick="switchTab('field', this)">
+      <span class="tab-icon">🏗️</span>Field Ops<div class="tab-count">5</div>
+    </button>
+    <button class="tab-btn" onclick="switchTab('admin', this)">
+      <span class="tab-icon">📋</span>Admin<div class="tab-count">5</div>
+    </button>
+    <button class="tab-btn" onclick="switchTab('safety', this)">
+      <span class="tab-icon">⛑️</span>Safety<div class="tab-count">4</div>
+    </button>
+    <button class="tab-btn" onclick="switchTab('hr', this)">
+      <span class="tab-icon">👥</span>HR & People<div class="tab-count">4</div>
+    </button>
+  </div>
+</div>
+
+<!-- COMICS SECTION -->
+<div class="comics-section">
+
+  <!-- WAREHOUSE -->
+  <div class="dept-panel active" id="panel-warehouse">
+    <div class="dept-title-bar">
+      <span class="dept-title-icon">📦</span>
+      <h3>Warehouse <span class="dept-color">Operations</span></h3>
+      <span class="dept-desc">Stock control, equipment handling & logistics</span>
+    </div>
+    <div class="comics-grid" id="grid-warehouse">
+      <!-- cards injected by JS -->
+    </div>
+  </div>
+
+  <!-- DRIVERS -->
+  <div class="dept-panel" id="panel-drivers">
+    <div class="dept-title-bar">
+      <span class="dept-title-icon">🚚</span>
+      <h3>Driver <span class="dept-color">Guidelines</span></h3>
+      <span class="dept-desc">Fleet, routes & safe driving practices</span>
+    </div>
+    <div class="comics-grid" id="grid-drivers"></div>
+  </div>
+
+  <!-- NOC -->
+  <div class="dept-panel" id="panel-noc">
+    <div class="dept-title-bar">
+      <span class="dept-title-icon">🖥️</span>
+      <h3>NOC <span class="dept-color">Team</span></h3>
+      <span class="dept-desc">Network monitoring, incidents & escalation</span>
+    </div>
+    <div class="comics-grid" id="grid-noc"></div>
+  </div>
+
+  <!-- SPLICING -->
+  <div class="dept-panel" id="panel-splicing">
+    <div class="dept-title-bar">
+      <span class="dept-title-icon">🔧</span>
+      <h3>Fibre <span class="dept-color">Splicing</span></h3>
+      <span class="dept-desc">Fusion splicing, testing & cable management</span>
+    </div>
+    <div class="comics-grid" id="grid-splicing"></div>
+  </div>
+
+  <!-- FIELD OPS -->
+  <div class="dept-panel" id="panel-field">
+    <div class="dept-title-bar">
+      <span class="dept-title-icon">🏗️</span>
+      <h3>Field <span class="dept-color">Operations</span></h3>
+      <span class="dept-desc">Installation, trenching & site management</span>
+    </div>
+    <div class="comics-grid" id="grid-field"></div>
+  </div>
+
+  <!-- ADMIN -->
+  <div class="dept-panel" id="panel-admin">
+    <div class="dept-title-bar">
+      <span class="dept-title-icon">📋</span>
+      <h3>Admin & <span class="dept-color">Support</span></h3>
+      <span class="dept-desc">Scheduling, ticketing & internal systems</span>
+    </div>
+    <div class="comics-grid" id="grid-admin"></div>
+  </div>
+
+  <!-- SAFETY -->
+  <div class="dept-panel" id="panel-safety">
+    <div class="dept-title-bar">
+      <span class="dept-title-icon">⛑️</span>
+      <h3>Health &amp; <span class="dept-color">Safety</span></h3>
+      <span class="dept-desc">PPE, hazard awareness & emergency protocols</span>
+    </div>
+    <div class="comics-grid" id="grid-safety"></div>
+  </div>
+
+  <!-- HR -->
+  <div class="dept-panel" id="panel-hr">
+    <div class="dept-title-bar">
+      <span class="dept-title-icon">👥</span>
+      <h3>HR &amp; <span class="dept-color">People</span></h3>
+      <span class="dept-desc">Policies, benefits & company culture</span>
+    </div>
+    <div class="comics-grid" id="grid-hr"></div>
+  </div>
+
+</div>
+
+<!-- READER MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModalOnBg(event)">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-title">Comic Title</div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-viewer">
+      <div class="pdf-placeholder">
+        <div class="pdf-placeholder-icon" id="modal-icon">📖</div>
+        <h4 id="modal-cover-title">Loading...</h4>
+        <p>Your PDF comic will open here. In production, embed the PDF viewer below or link to the file hosted on your server.</p>
+        <p style="margin-top:0.5rem; font-size:0.75rem; color:rgba(240,246,255,0.3);">File: <span id="modal-filename" style="color:rgba(59,130,246,0.8)">comic.pdf</span></p>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="modal-btn modal-btn-primary" id="modal-dl-btn" onclick="downloadComic()">⬇ Download PDF</button>
+      <button class="modal-btn modal-btn-secondary" onclick="closeModal()">✕ Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">🔥 FIRESIDE</div>
+  <p>ICT Fibre Connecting & Maintenance — Onboarding Comic Library</p>
+  <p>© 2025 Fireside. All rights reserved. Internal use only.</p>
+</footer>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────────────
+const departments = {
+  warehouse: {
+    grad: 'grad-warehouse',
+    icon: '📦',
+    comics: [
+      { title: 'Welcome to the Warehouse', sub: 'Your First Day', icon: '🏭', badge: 'START HERE', isNew: false, file: 'warehouse-welcome.pdf', pages: 12 },
+      { title: 'Stock Control Basics', sub: 'Inventory 101', icon: '📊', badge: null, isNew: false, file: 'warehouse-stock.pdf', pages: 10 },
+      { title: 'Cable Drum Handling', sub: 'Safety First', icon: '🔄', badge: null, isNew: false, file: 'warehouse-drums.pdf', pages: 8 },
+      { title: 'Equipment Sign-Out', sub: 'Tools & Gear', icon: '🔑', badge: null, isNew: true, file: 'warehouse-signout.pdf', pages: 9 },
+      { title: 'Hazardous Storage', sub: 'Chemical Safety', icon: '⚠️', badge: null, isNew: false, file: 'warehouse-hazmat.pdf', pages: 7 },
+      { title: 'Loading & Dispatch', sub: 'Getting It Out the Door', icon: '🚪', badge: null, isNew: false, file: 'warehouse-dispatch.pdf', pages: 11 },
+    ]
+  },
+  drivers: {
+    grad: 'grad-drivers',
+    icon: '🚚',
+    comics: [
+      { title: 'Know Your Vehicle', sub: 'Fleet Orientation', icon: '🚛', badge: 'START HERE', isNew: false, file: 'drivers-vehicle.pdf', pages: 10 },
+      { title: 'Route Planning 101', sub: 'Getting There Safely', icon: '🗺️', badge: null, isNew: false, file: 'drivers-routes.pdf', pages: 8 },
+      { title: 'Load & Secure', sub: 'Cargo Best Practices', icon: '📦', badge: null, isNew: false, file: 'drivers-cargo.pdf', pages: 9 },
+      { title: 'Incident Reporting', sub: 'When Things Go Wrong', icon: '📝', badge: null, isNew: true, file: 'drivers-incidents.pdf', pages: 7 },
+      { title: 'Driver Code of Conduct', sub: 'On the Road Rules', icon: '🛣️', badge: null, isNew: false, file: 'drivers-conduct.pdf', pages: 8 },
+    ]
+  },
+  noc: {
+    grad: 'grad-noc',
+    icon: '🖥️',
+    comics: [
+      { title: 'NOC Overview', sub: 'What We Watch & Why', icon: '📡', badge: 'START HERE', isNew: false, file: 'noc-overview.pdf', pages: 14 },
+      { title: 'Alarm Triage', sub: 'P1 to P4 Priorities', icon: '🚨', badge: null, isNew: false, file: 'noc-alarms.pdf', pages: 10 },
+      { title: 'Network Monitoring Tools', sub: 'Your Digital Cockpit', icon: '🖥️', badge: null, isNew: false, file: 'noc-tools.pdf', pages: 12 },
+      { title: 'Escalation Procedures', sub: 'Who to Call & When', icon: '📞', badge: null, isNew: false, file: 'noc-escalation.pdf', pages: 8 },
+      { title: 'Fibre Outage Playbook', sub: 'Rapid Response Guide', icon: '⚡', badge: null, isNew: true, file: 'noc-outage.pdf', pages: 11 },
+      { title: 'Shift Handover', sub: 'Smooth Transitions', icon: '🔄', badge: null, isNew: false, file: 'noc-handover.pdf', pages: 7 },
+    ]
+  },
+  splicing: {
+    grad: 'grad-splicing',
+    icon: '🔧',
+    comics: [
+      { title: 'Fibre Basics', sub: 'What You\'re Working With', icon: '💡', badge: 'START HERE', isNew: false, file: 'splice-basics.pdf', pages: 13 },
+      { title: 'Fusion Splicer Operation', sub: 'Machine Mastery', icon: '⚗️', badge: null, isNew: false, file: 'splice-machine.pdf', pages: 10 },
+      { title: 'Cable Prep & Cleaving', sub: 'Perfect Every Time', icon: '✂️', badge: null, isNew: false, file: 'splice-prep.pdf', pages: 9 },
+      { title: 'OTDR Testing', sub: 'Reading the Results', icon: '📈', badge: null, isNew: false, file: 'splice-otdr.pdf', pages: 11 },
+      { title: 'Splice Enclosures', sub: 'Sealing & Protecting', icon: '🔒', badge: null, isNew: true, file: 'splice-enclosures.pdf', pages: 8 },
+    ]
+  },
+  field: {
+    grad: 'grad-field',
+    icon: '🏗️',
+    comics: [
+      { title: 'Site Preparation', sub: 'Before You Dig', icon: '📍', badge: 'START HERE', isNew: false, file: 'field-siteprep.pdf', pages: 12 },
+      { title: 'Trenching & Ducting', sub: 'Underground Basics', icon: '⛏️', badge: null, isNew: false, file: 'field-trenching.pdf', pages: 10 },
+      { title: 'Aerial Installations', sub: 'Poles & Overhead Lines', icon: '🏙️', badge: null, isNew: false, file: 'field-aerial.pdf', pages: 11 },
+      { title: 'Customer Premises', sub: 'Last Mile Done Right', icon: '🏠', badge: null, isNew: true, file: 'field-premises.pdf', pages: 9 },
+      { title: 'Site Sign-Off', sub: 'Quality & Completion', icon: '✅', badge: null, isNew: false, file: 'field-signoff.pdf', pages: 7 },
+    ]
+  },
+  admin: {
+    grad: 'grad-admin',
+    icon: '📋',
+    comics: [
+      { title: 'Company Systems', sub: 'Logging In & Getting Set', icon: '💻', badge: 'START HERE', isNew: false, file: 'admin-systems.pdf', pages: 10 },
+      { title: 'Ticketing & Job Orders', sub: 'From Request to Done', icon: '🎟️', badge: null, isNew: false, file: 'admin-tickets.pdf', pages: 8 },
+      { title: 'Scheduling & Planning', sub: 'Keeping the Team Moving', icon: '📅', badge: null, isNew: false, file: 'admin-scheduling.pdf', pages: 9 },
+      { title: 'Billing & Invoices', sub: 'Dollars and Sense', icon: '💰', badge: null, isNew: false, file: 'admin-billing.pdf', pages: 7 },
+      { title: 'Customer Communication', sub: 'Saying the Right Thing', icon: '📧', badge: null, isNew: true, file: 'admin-comms.pdf', pages: 8 },
+    ]
+  },
+  safety: {
+    grad: 'grad-safety',
+    icon: '⛑️',
+    comics: [
+      { title: 'PPE Every Day', sub: 'Gear Up, Stay Safe', icon: '🦺', badge: 'REQUIRED', isNew: false, file: 'safety-ppe.pdf', pages: 8 },
+      { title: 'Electrical Hazards', sub: 'Working Near Live Lines', icon: '⚡', badge: 'REQUIRED', isNew: false, file: 'safety-electrical.pdf', pages: 9 },
+      { title: 'Working at Heights', sub: 'Poles, Rooftops & Ladders', icon: '🪜', badge: null, isNew: false, file: 'safety-heights.pdf', pages: 10 },
+      { title: 'Emergency Procedures', sub: 'When the Worst Happens', icon: '🚑', badge: null, isNew: true, file: 'safety-emergency.pdf', pages: 7 },
+    ]
+  },
+  hr: {
+    grad: 'grad-hr',
+    icon: '👥',
+    comics: [
+      { title: 'Welcome to Fireside', sub: 'Our Culture & Values', icon: '🔥', badge: 'START HERE', isNew: false, file: 'hr-welcome.pdf', pages: 12 },
+      { title: 'Leave & Benefits', sub: 'What You\'re Entitled To', icon: '🎁', badge: null, isNew: false, file: 'hr-benefits.pdf', pages: 9 },
+      { title: 'Code of Conduct', sub: 'How We Treat Each Other', icon: '🤝', badge: null, isNew: false, file: 'hr-conduct.pdf', pages: 8 },
+      { title: 'Performance & Growth', sub: 'Your Path at Fireside', icon: '📈', badge: null, isNew: true, file: 'hr-growth.pdf', pages: 10 },
+    ]
+  },
+};
+
+// ── RENDER CARDS ──────────────────────────────────────────────────────────
+function renderAll() {
+  Object.entries(departments).forEach(([dept, data]) => {
+    const grid = document.getElementById('grid-' + dept);
+    if (!grid) return;
+    grid.innerHTML = data.comics.map((c, i) => buildCard(c, dept, data.grad, i + 1)).join('');
+  });
+}
+
+function buildCard(c, dept, grad, num) {
+  const badgeHtml = c.badge
+    ? `<div class="cover-badge${c.isNew ? ' new-badge' : ''}">${c.badge}</div>`
+    : (c.isNew ? `<div class="cover-badge new-badge">NEW</div>` : '');
+
+  return `
+    <div class="comic-card" data-title="${c.title}" data-dept="${dept}">
+      <div class="comic-cover">
+        <div class="comic-cover-art ${grad}">
+          ${badgeHtml}
+          <div class="cover-icon">${c.icon}</div>
+          <div class="cover-title">${c.title}</div>
+          <div class="cover-number">#${num}</div>
+        </div>
+      </div>
+      <div class="comic-info">
+        <div class="comic-title">${c.title}</div>
+        <div class="comic-meta">${c.sub} · ${c.pages} pages</div>
+        <div class="comic-actions">
+          <button class="btn-read" onclick="openModal('${escHtml(c.title)}', '${escHtml(c.file)}', '${escHtml(c.icon)}')">📖 Read</button>
+          <button class="btn-dl" title="Download" onclick="triggerDownload('${escHtml(c.file)}', '${escHtml(c.title)}')">⬇</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+function escHtml(s) { return s.replace(/'/g, "\\'"); }
+
+// ── TABS ──────────────────────────────────────────────────────────────────
+function switchTab(dept, btn) {
+  document.querySelectorAll('.dept-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + dept).classList.add('active');
+  btn.classList.add('active');
+  document.getElementById('searchInput').value = '';
+  handleSearch('');
+}
+
+// ── SEARCH ────────────────────────────────────────────────────────────────
+function handleSearch(query) {
+  const q = query.toLowerCase().trim();
+  document.querySelectorAll('.comic-card').forEach(card => {
+    const title = card.dataset.title.toLowerCase();
+    card.style.display = (!q || title.includes(q)) ? '' : 'none';
+  });
+}
+
+// ── MODAL ─────────────────────────────────────────────────────────────────
+let currentFile = '';
+let currentTitle = '';
+
+function openModal(title, file, icon) {
+  currentFile = file;
+  currentTitle = title;
+  document.getElementById('modal-title').textContent = title;
+  document.getElementById('modal-cover-title').textContent = title;
+  document.getElementById('modal-icon').textContent = icon;
+  document.getElementById('modal-filename').textContent = file;
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeModalOnBg(e) {
+  if (e.target.id === 'modal') closeModal();
+}
+
+function downloadComic() { triggerDownload(currentFile, currentTitle); }
+
+function triggerDownload(file, title) {
+  // In production replace with actual PDF URL:
+  // window.open('/comics/' + file, '_blank');
+  alert(`Download triggered for:\n"${title}"\n\nFile: ${file}\n\nConnect this to your PDF hosting to enable downloads.`);
+}
+
+// ── KEYBOARD ──────────────────────────────────────────────────────────────
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// ── INIT ──────────────────────────────────────────────────────────────────
+renderAll();
+</script>
+</body>
+</html>
